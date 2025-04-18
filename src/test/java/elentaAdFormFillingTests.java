@@ -376,10 +376,55 @@ public class elentaAdFormFillingTests {
     }
 
     @Test
+    public void adFormFillSubdomainEmailTest() {
+        driver.findElement(By.id("title")).sendKeys("Used Lada with golden rims");
+        driver.findElement(By.id("text")).sendKeys("Selling my lovely Lada that was looked after and cared for");
+        driver.findElement(By.id("price")).sendKeys("15000");
+        driver.findElement(By.id("location-search-box")).sendKeys("Gargždai");
+        driver.findElement(By.id("phone")).sendKeys("37061072845");
+        driver.findElement(By.id("email")).sendKeys("ThomasShelby@gmail.subdomain.com");
+        driver.findElement(By.id("submit-button")).click();
+    }
+
+    @Test
+    public void adFormFillInvalidDomainEmailTest() {
+        driver.findElement(By.id("title")).sendKeys("Used Lada with golden rims");
+        driver.findElement(By.id("text")).sendKeys("Selling my lovely Lada that was looked after and cared for");
+        driver.findElement(By.id("price")).sendKeys("15000");
+        driver.findElement(By.id("location-search-box")).sendKeys("Gargždai");
+        driver.findElement(By.id("phone")).sendKeys("37061072845");
+        driver.findElement(By.id("email")).sendKeys("ThomasShelby@gmail");
+        driver.findElement(By.id("submit-button")).click();
+    }
+
+    @Test
+    public void adFormFillMultipleAtSymbolsEmailTest() {
+        driver.findElement(By.id("title")).sendKeys("Used Lada with golden rims");
+        driver.findElement(By.id("text")).sendKeys("Selling my lovely Lada that was looked after and cared for");
+        driver.findElement(By.id("price")).sendKeys("15000");
+        driver.findElement(By.id("location-search-box")).sendKeys("Gargždai");
+        driver.findElement(By.id("phone")).sendKeys("37061072845");
+        driver.findElement(By.id("email")).sendKeys("ThomasShelby@@gmail");
+        driver.findElement(By.id("submit-button")).click();
+    }
+
+    @Test
+    public void adFormFillSpaceCharacterWithinEmailTest() {
+        driver.findElement(By.id("title")).sendKeys("Used Lada with golden rims");
+        driver.findElement(By.id("text")).sendKeys("Selling my lovely Lada that was looked after and cared for");
+        driver.findElement(By.id("price")).sendKeys("15000");
+        driver.findElement(By.id("location-search-box")).sendKeys("Gargždai");
+        driver.findElement(By.id("phone")).sendKeys("37061072845");
+        driver.findElement(By.id("email")).sendKeys("Thomas Shelby@gmail");
+        driver.findElement(By.id("submit-button")).click();
+    }
+
+
+    @Test
     public void photoUploadValidTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
     }
 
@@ -403,7 +448,7 @@ public class elentaAdFormFillingTests {
     public void photoUploadGifTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/11.gif");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
     }
 
@@ -411,7 +456,7 @@ public class elentaAdFormFillingTests {
     public void photoUploadPngTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
     }
 
@@ -419,7 +464,7 @@ public class elentaAdFormFillingTests {
     public void photoUploadMp4Test() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/2.mp4");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
 
     }
@@ -428,6 +473,7 @@ public class elentaAdFormFillingTests {
     public void photoUpload10MBFileTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/16.png");
+        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
     }
 
@@ -435,14 +481,31 @@ public class elentaAdFormFillingTests {
     public void photoUploadRemoveAlreadyUploadedPictureTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.id("remove-photo-1")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void adFinalSubmit() throws InterruptedException {
+    public void photoUploadDuplicatePictureUploadTest() throws InterruptedException {
+        adFormFillValidInfoTest();
+        uploadImage("pics/15.png", "pics/15.png", "pics/15.png");
+        Thread.sleep(3000);
+        driver.findElement(By.id("forward-button")).click();
+    }
+
+    @Test
+    public void photoUploadDdsFileUploadTest() throws InterruptedException {
+        adFormFillValidInfoTest();
+        uploadImage("pics/10.dds");
+        Thread.sleep(3000);
+        driver.findElement(By.id("forward-button")).click();
+    }
+
+
+    @Test
+    public void adFinalSubmitTest() throws InterruptedException {
         photoUploadValidTest();
         driver.findElement(By.id("forward-button")).click();
 

@@ -300,7 +300,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationMultipleAtCharactersInEmailTest() {
+    public void registrationMultipleAtSymbolsInEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail@gmail@@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -380,6 +380,7 @@ public class elentaRegistrationTests {
         driver.findElement(By.id("Password2")).sendKeys("Shelby");
         driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
     }
+
     @AfterClass
     public void tearDown(){
         //        driver.close();
