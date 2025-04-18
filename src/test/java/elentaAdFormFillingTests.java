@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,6 +14,7 @@ import java.util.Random;
 
 public class elentaAdFormFillingTests {
     public static WebDriver driver;
+    public static WebDriverWait wait;
 
     public static String generateRandomSpecialChars(int length) {
         String specialChars = "!#$%^&*()_+-=[]{}|;:',.<>/?";
@@ -60,6 +63,21 @@ public class elentaAdFormFillingTests {
         }
 
         fileInput.sendKeys(fullPaths.toString().trim());
+
+        long start = System.currentTimeMillis();
+        while(true) {
+            if(start + 5000 < System.currentTimeMillis()){
+                break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {}
+            if (driver.findElement(By.id("photos-container")).findElements(By.tagName("img")).size() == relativeFilePaths.length) {
+                break;
+            }
+
+        }
+
     }
 
     public void acceptCookies() {
@@ -86,6 +104,7 @@ public class elentaAdFormFillingTests {
     @BeforeClass
     public void setUp(){
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         acceptCookies();
@@ -98,6 +117,9 @@ public class elentaAdFormFillingTests {
     @BeforeMethod
     public void beforeMethod(){
         driver.get("https://elenta.lt/patalpinti/ivesti-informacija?categoryId=AutoMoto_Automobiliai&actionId=Siulo&returnurl=%2F");
+        driver.findElement(By.id("location-search-box")).clear();
+        driver.findElement(By.id("phone")).clear();
+        driver.findElement(By.id("email")).clear();
     }
 
     @Test
@@ -419,61 +441,58 @@ public class elentaAdFormFillingTests {
         driver.findElement(By.id("submit-button")).click();
     }
 
-
     @Test
-    public void photoUploadValidTest() throws InterruptedException {
+    public void photoUploadValidTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(2000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadNoPictureSelectedTest() throws InterruptedException {
+    public void photoUploadNoPictureSelectedTest() {
         adFormFillValidInfoTest();
-        uploadImage("");
-        Thread.sleep(1000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUpload10PicturesUploadTest() throws InterruptedException {
+    public void photoUpload10PicturesUploadTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/1.jpg", "pics/3.jpg", "pics/4.jpg", "pics/5.jpg", "pics/6.jpg", "pics/7.jpg", "pics/8.jpg", "pics/9.jpg", "pics/13.jpg", "pics/15.png");
-        Thread.sleep(3000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadGifTest() throws InterruptedException {
+    public void photoUploadGifTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/11.gif");
-        Thread.sleep(2000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadPngTest() throws InterruptedException {
+    public void photoUploadPngTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(2000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadMp4Test() throws InterruptedException {
+    public void photoUploadMp4Test() {
         adFormFillValidInfoTest();
         uploadImage("pics/2.mp4");
-        Thread.sleep(2000);
         driver.findElement(By.id("forward-button")).click();
-
+        driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUpload10MBFileTest() throws InterruptedException {
+    public void photoUpload10MBFileTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/16.png");
-        Thread.sleep(2000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
@@ -481,38 +500,38 @@ public class elentaAdFormFillingTests {
     public void photoUploadRemoveAlreadyUploadedPictureTest() throws InterruptedException {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png");
-        Thread.sleep(2000);
         driver.findElement(By.id("remove-photo-1")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("forward-button")).click();
+        driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadDuplicatePictureUploadTest() throws InterruptedException {
+    public void photoUploadDuplicatePictureUploadTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/15.png", "pics/15.png", "pics/15.png");
-        Thread.sleep(3000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
 
     @Test
-    public void photoUploadDdsFileUploadTest() throws InterruptedException {
+    public void photoUploadDdsFileUploadTest() {
         adFormFillValidInfoTest();
         uploadImage("pics/10.dds");
-        Thread.sleep(3000);
+        driver.findElement(By.id("forward-button")).click();
         driver.findElement(By.id("forward-button")).click();
     }
-
 
     @Test
-    public void adFinalSubmitTest() throws InterruptedException {
+    public void removeUploadedAdTest() {
         photoUploadValidTest();
-        driver.findElement(By.id("forward-button")).click();
-
+        driver.findElement(By.xpath("//*[@id=\"promotead-form\"]/table/tbody/tr[12]/td[2]/a")).click();
+        driver.findElement(By.className("delete")).click();
+        driver.switchTo().alert().accept();
     }
 
-
-
-
-
+    @AfterClass
+    public void tearDown(){
+        //        driver.close();
+    }
 }
