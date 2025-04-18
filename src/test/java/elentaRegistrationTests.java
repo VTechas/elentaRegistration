@@ -135,7 +135,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolUsernameTest() {
+    public void registrationSpaceCharacterUsernameTest() {
         driver.findElement(By.id("UserName")).sendKeys(" ");
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -144,7 +144,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolEmailTest() {
+    public void registrationSpaceCharacterEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys(" ");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -153,7 +153,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolPasswordTest() {
+    public void registrationSpaceCharacterPasswordTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys(" ");
@@ -162,7 +162,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolPasswordRepeatTest() {
+    public void registrationSpaceCharacterPasswordRepeatTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -199,7 +199,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolWithinUsernameTest() {
+    public void registrationSpaceCharacterWithinUsernameTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas " + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -208,7 +208,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolWithinEmailTest() {
+    public void registrationSpaceCharacterWithinEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas " + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -217,7 +217,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolWithinPasswordTest() {
+    public void registrationSpaceCharacterWithinPasswordTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("She lby");
@@ -226,7 +226,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationSpaceSymbolAfterAtSymbolEmailTest() {
+    public void registrationSpaceCharacterAfterAtSymbolEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gm ail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -300,7 +300,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registrationMultipleAtSymbolsInEmailTest() {
+    public void registrationMultipleAtCharactersInEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail@gmail@@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -309,7 +309,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registration51SymbolEmailTest() {
+    public void registration51CharactersEmailTest() {
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + generateRandomLetters(29) + "Shelby@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("Shelby");
@@ -327,7 +327,7 @@ public class elentaRegistrationTests {
     }
 
     @Test
-    public void registration51SymbolPasswordTest() {
+    public void registration51CharactersPasswordTest() {
         String psw = generateRandomLetters(51);
         driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
         driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
@@ -336,7 +336,50 @@ public class elentaRegistrationTests {
         driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
     }
 
+    @Test
+    public void registration5CharactersPasswordTest() {
+        driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
+        driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
+        driver.findElement(By.id("Password")).sendKeys("Shelb");
+        driver.findElement(By.id("Password2")).sendKeys("Shelb");
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
+    }
 
+    @Test
+    public void registrationOnlyNumbersPasswordTest() {
+        driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
+        driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.com");
+        driver.findElement(By.id("Password")).sendKeys("123456");
+        driver.findElement(By.id("Password2")).sendKeys("123456");
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
+    }
+
+    @Test
+    public void registrationWithoutDomainEmailTest() {
+        driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
+        driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@");
+        driver.findElement(By.id("Password")).sendKeys("Shelby");
+        driver.findElement(By.id("Password2")).sendKeys("Shelby");
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
+    }
+
+    @Test
+    public void registrationWithoutAtCharacterEmailTest() {
+        driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
+        driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelbygmail.com");
+        driver.findElement(By.id("Password")).sendKeys("Shelby");
+        driver.findElement(By.id("Password2")).sendKeys("Shelby");
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
+    }
+
+    @Test
+    public void registrationSubdomainEmailTest() {
+        driver.findElement(By.id("UserName")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))));
+        driver.findElement(By.id("Email")).sendKeys("Thomas" + (100 + Math.round(Math.random() * (1000-100))) + "Shelby@gmail.subdomain.com");
+        driver.findElement(By.id("Password")).sendKeys("Shelby");
+        driver.findElement(By.id("Password2")).sendKeys("Shelby");
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/form/fieldset/table/tbody/tr[11]/td[2]/input")).click();
+    }
     @AfterClass
     public void tearDown(){
         //        driver.close();
